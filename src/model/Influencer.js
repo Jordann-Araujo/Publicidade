@@ -21,24 +21,8 @@ const Influencer = db.define("Influencer",
             type: DataTypes.STRING,
             allowNull: false
         },
-        agenda_dia: {
+        agenda: {
             type: DataTypes.DATE,
-            allowNull: false
-        },
-        agenda_hora: {
-            type: DataTypes.TIME,
-            allowNull: false
-        },
-        qnt_seguidores: {
-            type: DataTypes.NUMBER,
-            allowNull: false
-        },
-        interacao: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        nicho: {
-            type: DataTypes.STRING,
             allowNull: false
         }
     }

@@ -1,7 +1,7 @@
 let {Sequelize, DataTypes} = require("sequelize");
 const db = require("../db");
 
-const Empresa = db.define("Empresa",
+const Perfil = db.define("Perfil",
     {
         id: {
             type: DataTypes.INTEGER,
@@ -9,47 +9,31 @@ const Empresa = db.define("Empresa",
             primaryKey: true,
             allowNull: false
         },
-        nome: {
+        rede_social: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        descricao: {
+        qnt_seguidores: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        classificacao: {
-            type: DataTypes.NUMBER,
-            allowNull: false
-        },
-        end_estado: {
+        nicho: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        end_cidade: {
+        interacao_curtidas: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        end_bairro: {
+        interacao_comentarios: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        conta_email: {
+        interacao_visualizacao: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        conta_usuario: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        conta_senha: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        agenda: {
-            type: DataTypes.DATE,
             allowNull: false
         }
     }
 );
 
-module.exports = Empresa;
+module.exports = Perfil;

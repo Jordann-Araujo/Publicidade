@@ -1,7 +1,7 @@
 const {Pool} = require("../node_modules/pg");
 
 const pool = new Pool({
-    connectionString: '',
+    connectionString: 'postgres://sxlssrmppajjsl:22c365b742141e58fddb9f2d820234ed316f049bd232be3a37004b99275ffad7@ec2-3-95-85-91.compute-1.amazonaws.com:5432/d9kd91pc1pio5a',
     ssl: {
         rejectUnauthorized: false
     }
@@ -13,13 +13,25 @@ async function CriarTabela(comandoSql) {
     await con.query(comandoSql);
     con.release();
 }
+/*
+async function mostrarTuplas(tabela) {
+    let con = await pool.connect();
+    let res = await con.query(`select * from ${tabela}`);
+    let tuplas = res.rows;
+    for(let tupla of tuplas) {
+        console.log(tupla);
+    }
+    con.release();
+}*/
+
+//mostrarTuplas('Aluno')
 
 CriarTabela(`
 
 CREATE TABLE Empresa (
     id serial PRIMARY KEY,
     descricao varchar,
-    classicacao number,
+    classicacao float,
     end_bairro varchar,
     end_estado varchar,
     end_cidade varchar,
@@ -47,7 +59,7 @@ CREATE TABLE Campanha (
     estatisticas varchar,
     tempo_inicio varchar,
     tempo_fim varchar,
-    Valor number,
+    Valor float,
     id serial PRIMARY KEY,
     fk_Empresa_id serial
 );
@@ -67,7 +79,7 @@ CREATE TABLE Influencer (
 CREATE TABLE Divulgacao (
     id serial PRIMARY KEY,
     plataforma varchar,
-    valor number,
+    valor float,
     estatisticas varchar
 );
 
@@ -86,7 +98,7 @@ CREATE TABLE feedback (
     fk_Usuario_id serial
 );
 
-CREATE TABLE contato (
+CREATE TABLE contato_1 (
     fk_Usuario_id serial,
     fk_Influencer_id serial
 );
@@ -96,7 +108,7 @@ CREATE TABLE faz (
     fk_Influencer_id serial
 );
 
-CREATE TABLE feedback (
+CREATE TABLE feedback_1 (
     fk_Divulgacao_id serial,
     fk_Usuario_id serial
 );
@@ -136,12 +148,12 @@ ALTER TABLE feedback ADD CONSTRAINT FK_feedback_2
     REFERENCES Usuario (id)
     ON DELETE SET NULL;
  
-ALTER TABLE contato ADD CONSTRAINT FK_contato_1
+ALTER TABLE contato_1 ADD CONSTRAINT FK_contato_1
     FOREIGN KEY (fk_Usuario_id)
     REFERENCES Usuario (id)
     ON DELETE SET NULL;
  
-ALTER TABLE contato ADD CONSTRAINT FK_contato_2
+ALTER TABLE contato_1 ADD CONSTRAINT FK_contato_2
     FOREIGN KEY (fk_Influencer_id)
     REFERENCES Influencer (id)
     ON DELETE SET NULL;
@@ -156,12 +168,12 @@ ALTER TABLE faz ADD CONSTRAINT FK_faz_2
     REFERENCES Influencer (id)
     ON DELETE RESTRICT;
  
-ALTER TABLE feedback ADD CONSTRAINT FK_feedback_1
+ALTER TABLE feedback_1 ADD CONSTRAINT FK_feedback_1
     FOREIGN KEY (fk_Divulgacao_id)
     REFERENCES Divulgacao (id)
     ON DELETE SET NULL;
  
-ALTER TABLE feedback ADD CONSTRAINT FK_feedback_2
+ALTER TABLE feedback_1 ADD CONSTRAINT FK_feedback_2
     FOREIGN KEY (fk_Usuario_id)
     REFERENCES Usuario (id)
     ON DELETE SET NULL;`)

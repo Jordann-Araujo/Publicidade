@@ -1,6 +1,6 @@
 let {Sequelize, DataTypes} = require("sequelize");
 const db = require("../db");
-
+const Usuario = require("./Usuario");
 const Influencer = db.define("Influencer",
     {
         id: {
@@ -8,6 +8,13 @@ const Influencer = db.define("Influencer",
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
+        },
+        UsuarioId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Usuario, 
+                key: 'id'
+            }
         },
         conta_email: {
             type: DataTypes.STRING,

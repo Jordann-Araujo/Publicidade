@@ -1,6 +1,6 @@
 let {Sequelize, DataTypes} = require("sequelize");
 const db = require("../db");
-
+const Influencer = require("./Influencer");
 const Perfil = db.define("Perfil",
     {
         id: {
@@ -8,6 +8,13 @@ const Perfil = db.define("Perfil",
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
+        },
+        InfluencerId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Influencer, 
+                key: 'id'
+            }
         },
         rede_social: {
             type: DataTypes.STRING,

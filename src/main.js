@@ -1,12 +1,16 @@
-const db = require('./db')
-const Usuario = require('./model/Usuario')
-const Dao = require('./service/DAO')
+try{
+    const Usuario = require('./model/Usuario.js')
+    const Dao = require("./service/DAO")
 
-let dao = new Dao(Usuario)
-/*let usuario = {
-    id: 123,
-    nome: "Fulaninho",
-    end_estado: "PB"
-}*/
+    let usuario = new Dao(Usuario)
+    usuario.delete(1)
+} catch (e) {
+    console.log(e.message)
+}
 
-dao.ler(1)
+try{
+    const daoEmpresa = require('./service/DAOEmpresa')
+    daoEmpresa.ler()
+} catch (e) {
+    console.log(e.message)
+}

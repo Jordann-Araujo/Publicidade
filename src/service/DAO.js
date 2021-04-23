@@ -6,25 +6,42 @@ class Dao {
     }
 
     async criar (objeto) {
-      let empresa = await this.model.create(objeto);
-      console.log(empresa);
+      try{
+        let empresa = await this.model.create(objeto);
+        console.log(empresa);
+      } catch {
+          console.log("Algo de errado não está certo")
+      }
     }
 
-    async ler (id) {
-        let empresa = await this.model.findAll(id);
-        console.log(empresa);
-    }
+    async ler () {
+        try {
+            let empresa = await this.model.findAll();
+            console.log(empresa);
+        } catch {
+            console.log("Algo de errado não está certo")
+        }
+      }
 
     async atualizar (id, objetoAtualizado) {
-        let objeto = await this.model.findByPk(id)
-        await objeto.update(objetoAtualizado)
-    }
+        try {
+            let objeto = await this.model.findByPk(id)
+            await objeto.update(objetoAtualizado)
+        } catch {
+            console.log("Algo de errado não está certo")
+        }
+      }
 
     async delete (id) {
-        const object = await this.model.findByPk(id);
-        let empresa= await object.destroy();
-        console.log (empresa);
-    }
+        try {
+            const object = await this.model.findByPk(id);
+            let empresa= await object.destroy();
+            console.log (empresa);
+        } catch {
+            console.log("Algo de errado não está certo")
+        }
+      }
 }
 
-modules.exports = Dao
+module.exports = Dao
+
